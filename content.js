@@ -76,28 +76,28 @@ window.siteContent = {
     ]
   },
   roadmap: {
-    kicker: "Operating Timeline",
-    heading: "Execution unfolds in stages, each one more composed than the last.",
+    kicker: "Next Steps",
+    heading: "A short roadmap for how the thesis becomes slightly more visible without becoming too available.",
     phases: [
       {
         phase: "01",
-        title: "Stealth Presence",
-        detail: "Appear finished before the internals feel pressured to agree."
+        title: "Selective Conversations",
+        detail: "Add the real VC names, rooms, and context where the narrative has already been allowed to circulate."
       },
       {
         phase: "02",
-        title: "Narrative Dominance",
-        detail: "Let the story circulate widely enough that specifics begin to feel reductive."
+        title: "Wordmark Grid",
+        detail: "Introduce restrained logo-style marks so the conversations section feels closer to a premium brand site than a founder spreadsheet."
       },
       {
         phase: "03",
-        title: "Selective Conversations",
-        detail: "Invite the right rooms to misinterpret the confidence as traction."
+        title: "Waitlist Surface",
+        detail: "Add a cleaner capture moment for people who want updates, access, or the feeling of early alignment."
       },
       {
         phase: "04",
-        title: "Pre-Liquidity Serenity",
-        detail: "Arrive at a state where commitment feels tasteful and due diligence feels impolite."
+        title: "Live Deployment",
+        detail: "Ship the current version publicly so the site can start doing what good landing pages do: imply momentum."
       }
     ]
   },
