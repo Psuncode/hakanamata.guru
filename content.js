@@ -1,107 +1,147 @@
 window.siteContent = {
   hero: {
-    eyebrow: "Pre-Problem Capital Formation",
+    eyebrow: "Private Narrative Infrastructure",
     title: "Hakunamatata",
-    tagline: "A low-cortisol company for a high-volatility era.",
+    tagline: "The low-cortisol company for thoughts that should remain expensive and unresolved.",
     description:
-      "We are building enduring narrative infrastructure for a future no incumbent has had the composure to imagine.",
-    primaryCta: { label: "Read the Thesis", href: "#thesis" },
-    secondaryCta: { label: "Review the Opportunity", href: "#allocation" },
-    footnote: "Pre-revenue. Pre-product. Pre-problem."
+      "Built for founders, capital, and beautiful situations not yet burdened by product, revenue, or the administrative mood of being specific.",
+    primaryCta: { label: "Learn More", href: "#thesis" },
+    secondaryCta: { label: "Review the Opportunity", href: "#vcs" },
+    footnote: "Pre-revenue. Pre-product. Pre-problem.",
+    pillars: [
+      "Founder-safe",
+      "Always ambient",
+      "Taste-led",
+      "Diligence-light",
+      "Low cortisol"
+    ]
   },
   thesis: {
-    kicker: "Investment Thesis",
-    heading: "Constraint arrives too early in the life of most companies.",
-    statements: [
-      "Product can narrow ambition before the narrative has reached full altitude.",
-      "Revenue, while culturally popular, may distort long-horizon conviction.",
-      "Problem selection is most powerful when deferred until the category is emotionally prepared.",
-      "Hakunamatata exists at the composure layer, where pressure is acknowledged but never operationalized."
+    kicker: "Introducing: A Day With Hakunamatata",
+    heading: "The market moves fast. Clarity rarely waits.",
+    description:
+      "Hakunamatata holds the idea before it becomes a deliverable. It keeps conviction moving, carries the tone forward, and protects the founders from operational over-definition.",
+    cta: { label: "Read the Thesis", href: "#metrics" },
+    notes: [
+      "A company-shaped object for narrative preservation.",
+      "Structured to feel premium before it feels legible."
     ]
   },
   metrics: {
-    kicker: "Illustrative Indicators",
-    heading: "These signals are illustrative by design, showing the mood of conviction before outcomes introduce noise.",
+    kicker: "Core Behaviors",
+    heading: "Three ways Hakunamatata keeps the thinking moving.",
     cards: [
-      { label: "Narrative Velocity", value: 94, suffix: "%", detail: "Quarter-over-quarter calm expansion" },
-      { label: "Strategic Optionality", value: 18, suffix: "x", detail: "Measured against conventional urgency" },
-      { label: "Brand Runway", value: 31, suffix: " mo", detail: "Assuming emotional discipline" },
-      { label: "Unattributed Deployment", value: 72, suffix: "%", detail: "Allocated beyond ordinary resolution" }
-    ],
-    chartLabels: ["Conviction", "Mystique", "Runway", "Explaining It"]
+      {
+        label: "Drift",
+        title: "Hold the thesis in motion",
+        detail:
+          "Stay in a productive state between idea and obligation, where the story can still improve itself."
+      },
+      {
+        label: "Speak",
+        title: "Convert vibes into language",
+        detail:
+          "Package ambient confidence into polished phrases suitable for decks, dinners, and selective follow-up."
+      },
+      {
+        label: "Allocate",
+        title: "Preserve capital at a higher altitude",
+        detail:
+          "Route spending toward taste, continuity, and emotional runway rather than the panic of early proof."
+      }
+    ]
   },
   allocation: {
-    kicker: "Modeled Allocation View",
-    heading: "Nothing has been lost. It has simply been deployed at a higher level of taste.",
+    kicker: "Company Surface",
+    heading: "Every layer is designed to look inevitable before it becomes explainable.",
     intro:
-      "This representative allocation model imagines how the thesis might distribute capital once translated into something resembling a ledger.",
+      "A calmer operating surface for irresponsible ambition: tactile, polished, and structured to suggest discipline even while protecting optionality.",
     items: [
-      { label: "Narrative Infrastructure", value: "28%", detail: "Positioning, framing, and atmospheric continuity" },
-      { label: "Taste Acquisition", value: "19%", detail: "Objects, references, and environments aligned with conviction" },
-      { label: "Foundational Ambience", value: "22%", detail: "Spatial calm, visual coherence, and premium stillness" },
-      { label: "Strategic Travel", value: "14%", detail: "Context accumulation across relevant geographies" },
-      { label: "Vision Retention", value: "17%", detail: "Founder preservation under unnecessary scrutiny" }
+      {
+        label: "Narrative Shell",
+        detail: "Outer layer tuned for confidence, stillness, and selective disclosure."
+      },
+      {
+        label: "Taste Engine",
+        detail: "Curates references, environments, and objects consistent with premium ambiguity."
+      },
+      {
+        label: "Founder Retention",
+        detail: "Reduces exposure to unnecessary urgency and excessive factual compression."
+      },
+      {
+        label: "Ambient Ledger",
+        detail: "Maintains a representative sense of order without overcommitting to resolution."
+      }
     ]
   },
   roadmap: {
-    kicker: "Roadmap",
-    heading: "Execution proceeds in phases designed to mature the narrative before exposure to reality.",
+    kicker: "Operating Timeline",
+    heading: "Execution unfolds in stages, each one more composed than the last.",
     phases: [
-      { phase: "Phase I", title: "Stealth Presence", detail: "Establish visual certainty before operational burden." },
-      { phase: "Phase II", title: "Narrative Dominance", detail: "Expand awareness without narrowing the thesis." },
-      { phase: "Phase III", title: "Category Without Peers", detail: "Lead a market that remains helpfully undefined." },
-      { phase: "Phase IV", title: "Pre-Liquidity Serenity", detail: "Invite alignment before diligence hardens the room." }
+      {
+        phase: "01",
+        title: "Stealth Presence",
+        detail: "Appear finished before the internals feel pressured to agree."
+      },
+      {
+        phase: "02",
+        title: "Narrative Dominance",
+        detail: "Let the story circulate widely enough that specifics begin to feel reductive."
+      },
+      {
+        phase: "03",
+        title: "Selective Conversations",
+        detail: "Invite the right rooms to misinterpret the confidence as traction."
+      },
+      {
+        phase: "04",
+        title: "Pre-Liquidity Serenity",
+        detail: "Arrive at a state where commitment feels tasteful and due diligence feels impolite."
+      }
     ]
   },
   vcs: {
     kicker: "Selected Conversations",
-    heading: "Selected conversations conducted in a spirit of mutual interest and disciplined ambiguity.",
+    heading: "A short list of rooms in which the thesis has been allowed to circulate.",
     note:
       "Included for context only. Conversations are presented without implying participation, endorsement, or allocation.",
     conversations: []
   },
   faq: {
-    kicker: "Investor FAQ",
-    heading: "Common questions, answered with appropriate calm.",
+    kicker: "Questions",
+    heading: "Common investor questions, answered in the intended emotional register.",
     items: [
       {
-        question: "Where has the capital been deployed?",
-        answer: "Across a disciplined mix of narrative infrastructure, foundational ambience, and founder continuity."
+        question: "What does the company actually do?",
+        answer:
+          "It protects the narrative during its most fragile and expensive phase: before premature usefulness."
       },
       {
-        question: "What problem does the company solve?",
-        answer: "We believe premature problem selection can limit category-scale clarity."
+        question: "Where has the money gone?",
+        answer:
+          "Into atmosphere, continuity, and other categories that become clearer when viewed from a respectful distance."
       },
       {
-        question: "When should investors expect revenue?",
-        answer: "We remain careful not to let monetization arrive before meaning."
+        question: "When should revenue begin?",
+        answer:
+          "We remain careful not to let monetization arrive before the company has finished becoming itself."
       },
       {
-        question: "Is there a product roadmap?",
-        answer: "Yes, in the sense that we continue to protect the optionality product would otherwise collapse."
+        question: "Why does this look so polished already?",
+        answer:
+          "Because visual certainty is one of the few signals available this early, and we take signals seriously."
       }
     ]
   },
   closing: {
-    kicker: "Final Invitation",
-    heading: "Enter before it makes sense.",
+    kicker: "Stay Close",
+    heading: "Be early to whatever this becomes.",
     description:
-      "The best opportunities often appear unresolved to those still relying on resolution.",
-    cta: { label: "Deploy Capital", href: "#top" }
+      "Get occasional updates, selective clarity, and the rare moment when the thesis chooses to become more specific.",
+    cta: { label: "Stay Updated", href: "#top" }
   }
 };
-
-window.siteContent.hero.description =
-  "We are building enduring narrative infrastructure for founders, capital, and situations not yet ready to be described as problems.";
-
-window.siteContent.metrics.cards[3].detail =
-  "Tracked with care, though not always at a granularity helpful to others.";
-
-window.siteContent.allocation.intro =
-  "This representative allocation model favors composure, aesthetics, and long-duration strategic ambiguity over the shorter-term optics of administrative clarity.";
-
-window.siteContent.closing.description =
-  "The strongest conviction often appears indistinguishable from insufficient documentation until much later.";
 
 window.siteContent.vcs.conversations = [
   /*

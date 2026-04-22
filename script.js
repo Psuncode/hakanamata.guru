@@ -2,16 +2,22 @@ const { hero, thesis, metrics, allocation, roadmap, vcs, faq, closing } = window
 
 function setSection(id, html) {
   const section = document.getElementById(id);
-  section.innerHTML = html;
+  if (section) {
+    section.innerHTML = html;
+  }
 }
 
 function renderHero() {
+  const pillars = hero.pillars
+    .map((item) => `<span class="hero__pillar">${item}</span>`)
+    .join("");
+
   setSection(
     "hero",
     `
-      <div class="hero__backdrop"></div>
+      <div class="hero__backdrop" aria-hidden="true"></div>
       <div class="hero__content container reveal" data-reveal>
-        <p class="section-kicker">${hero.eyebrow}</p>
+        <p class="section-kicker hero__eyebrow">${hero.eyebrow}</p>
         <h1 class="hero__title">${hero.title}</h1>
         <p class="hero__tagline">${hero.tagline}</p>
         <p class="hero__description">${hero.description}</p>
@@ -19,6 +25,13 @@ function renderHero() {
           <a class="button button--primary" href="${hero.primaryCta.href}">${hero.primaryCta.label}</a>
           <a class="button button--ghost" href="${hero.secondaryCta.href}">${hero.secondaryCta.label}</a>
         </div>
+        <div class="hero__visual" aria-hidden="true">
+          <div class="hero__ring hero__ring--outer"></div>
+          <div class="hero__ring hero__ring--mid"></div>
+          <div class="hero__ring hero__ring--inner"></div>
+          <div class="hero__orb"></div>
+        </div>
+        <div class="hero__pillars">${pillars}</div>
         <p class="hero__footnote">${hero.footnote}</p>
       </div>
     `
@@ -26,24 +39,32 @@ function renderHero() {
 }
 
 function renderThesis() {
+  const notes = thesis.notes
+    .map(
+      (item) => `
+        <li class="feature-film__note">${item}</li>
+      `
+    )
+    .join("");
+
   setSection(
     "thesis",
     `
-      <div class="container">
-        <p class="section-kicker reveal" data-reveal>${thesis.kicker}</p>
-        <div class="section-heading reveal" data-reveal>
-          <h2>${thesis.heading}</h2>
+      <div class="container feature-film">
+        <div class="feature-film__media reveal" data-reveal aria-hidden="true">
+          <div class="feature-film__screen">
+            <div class="feature-film__glow"></div>
+            <div class="feature-film__label">Think calm</div>
+          </div>
         </div>
-        <div class="thesis-grid">
-          ${thesis.statements
-            .map(
-              (statement) => `
-                <article class="statement-card reveal" data-reveal>
-                  <p>${statement}</p>
-                </article>
-              `
-            )
-            .join("")}
+        <div class="feature-film__copy">
+          <p class="section-kicker reveal" data-reveal>${thesis.kicker}</p>
+          <div class="section-heading reveal" data-reveal>
+            <h2>${thesis.heading}</h2>
+            <p>${thesis.description}</p>
+          </div>
+          <ul class="feature-film__notes reveal" data-reveal>${notes}</ul>
+          <a class="text-link reveal" data-reveal href="${thesis.cta.href}">${thesis.cta.label}</a>
         </div>
       </div>
     `
@@ -56,26 +77,21 @@ function renderMetrics() {
     `
       <div class="container">
         <p class="section-kicker reveal" data-reveal>${metrics.kicker}</p>
-        <div class="section-heading reveal" data-reveal>
+        <div class="section-heading section-heading--center reveal" data-reveal>
           <h2>${metrics.heading}</h2>
         </div>
-        <div class="metrics-grid">
+        <div class="modes-grid">
           ${metrics.cards
             .map(
               (card) => `
-                <article class="metric-card reveal" data-reveal>
-                  <p class="metric-card__label">${card.label}</p>
-                  <p class="metric-card__value">
-                    <span class="counter" data-counter="${card.value}">0</span>${card.suffix}
-                  </p>
-                  <p class="metric-card__detail">${card.detail}</p>
+                <article class="mode-card reveal" data-reveal>
+                  <p class="mode-card__label">${card.label}</p>
+                  <h3>${card.title}</h3>
+                  <p>${card.detail}</p>
                 </article>
               `
             )
             .join("")}
-        </div>
-        <div class="signal-chart reveal" data-reveal aria-hidden="true">
-          ${metrics.chartLabels.map((label) => `<span>${label}</span>`).join("")}
         </div>
       </div>
     `
@@ -86,26 +102,29 @@ function renderAllocation() {
   setSection(
     "allocation",
     `
-      <div class="container">
-        <p class="section-kicker reveal" data-reveal>${allocation.kicker}</p>
-        <div class="section-heading reveal" data-reveal>
-          <h2>${allocation.heading}</h2>
-          <p>${allocation.intro}</p>
+      <div class="container surface-layout">
+        <div class="surface-copy">
+          <p class="section-kicker reveal" data-reveal>${allocation.kicker}</p>
+          <div class="section-heading reveal" data-reveal>
+            <h2>${allocation.heading}</h2>
+            <p>${allocation.intro}</p>
+          </div>
+          <div class="surface-list">
+            ${allocation.items
+              .map(
+                (item) => `
+                  <article class="surface-item reveal" data-reveal>
+                    <p class="surface-item__label">${item.label}</p>
+                    <p>${item.detail}</p>
+                  </article>
+                `
+              )
+              .join("")}
+          </div>
         </div>
-        <div class="allocation-list">
-          ${allocation.items
-            .map(
-              (item) => `
-                <article class="allocation-item reveal" data-reveal>
-                  <div>
-                    <p class="allocation-item__label">${item.label}</p>
-                    <p class="allocation-item__detail">${item.detail}</p>
-                  </div>
-                  <p class="allocation-item__value">${item.value}</p>
-                </article>
-              `
-            )
-            .join("")}
+        <div class="surface-visual reveal" data-reveal aria-hidden="true">
+          <div class="surface-visual__panel"></div>
+          <div class="surface-visual__panel surface-visual__panel--small"></div>
         </div>
       </div>
     `
@@ -118,15 +137,15 @@ function renderRoadmap() {
     `
       <div class="container">
         <p class="section-kicker reveal" data-reveal>${roadmap.kicker}</p>
-        <div class="section-heading reveal" data-reveal>
+        <div class="section-heading section-heading--center reveal" data-reveal>
           <h2>${roadmap.heading}</h2>
         </div>
-        <div class="roadmap-list">
+        <div class="timeline-list">
           ${roadmap.phases
             .map(
               (item) => `
-                <article class="roadmap-item reveal" data-reveal>
-                  <p class="roadmap-item__phase">${item.phase}</p>
+                <article class="timeline-card reveal" data-reveal>
+                  <p class="timeline-card__phase">${item.phase}</p>
                   <h3>${item.title}</h3>
                   <p>${item.detail}</p>
                 </article>
@@ -145,7 +164,7 @@ function renderVcs() {
       ? vcs.conversations
           .map(
             (item) => `
-              <article class="vc-card reveal" data-reveal>
+              <article class="conversation-card reveal" data-reveal>
                 <h3>${item.name}</h3>
                 <p>${item.context}</p>
                 <span>${item.outcome}</span>
@@ -154,7 +173,7 @@ function renderVcs() {
           )
           .join("")
       : `
-        <article class="vc-card reveal" data-reveal>
+        <article class="conversation-card reveal" data-reveal>
           <h3>Conversations to be listed from real meetings only</h3>
           <p>This section stays intentionally blank until actual names are entered.</p>
           <span>No implied endorsement</span>
@@ -166,11 +185,11 @@ function renderVcs() {
     `
       <div class="container">
         <p class="section-kicker reveal" data-reveal>${vcs.kicker}</p>
-        <div class="section-heading reveal" data-reveal>
+        <div class="section-heading section-heading--center reveal" data-reveal>
           <h2>${vcs.heading}</h2>
           <p>${vcs.note}</p>
         </div>
-        <div class="vc-grid">${vcItems}</div>
+        <div class="conversation-grid">${vcItems}</div>
       </div>
     `
   );
@@ -180,10 +199,12 @@ function renderFaq() {
   setSection(
     "faq",
     `
-      <div class="container">
-        <p class="section-kicker reveal" data-reveal>${faq.kicker}</p>
-        <div class="section-heading reveal" data-reveal>
-          <h2>${faq.heading}</h2>
+      <div class="container faq-shell">
+        <div class="faq-shell__intro">
+          <p class="section-kicker reveal" data-reveal>${faq.kicker}</p>
+          <div class="section-heading reveal" data-reveal>
+            <h2>${faq.heading}</h2>
+          </div>
         </div>
         <div class="faq-list">
           ${faq.items
@@ -206,7 +227,7 @@ function renderClosing() {
   setSection(
     "closing",
     `
-      <div class="container closing-panel reveal" data-reveal>
+      <div class="container closing-shell reveal" data-reveal>
         <p class="section-kicker">${closing.kicker}</p>
         <h2>${closing.heading}</h2>
         <p>${closing.description}</p>
@@ -234,9 +255,6 @@ function setupReveals() {
     document.querySelectorAll("[data-reveal]").forEach((item) => {
       item.classList.add("is-visible");
     });
-    document.querySelectorAll("[data-counter]").forEach((counter) => {
-      counter.textContent = counter.dataset.counter;
-    });
     return;
   }
 
@@ -255,47 +273,19 @@ function setupReveals() {
   document.querySelectorAll("[data-reveal]").forEach((item) => {
     revealObserver.observe(item);
   });
-
-  const counterObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-
-        const node = entry.target;
-        const target = Number(node.dataset.counter);
-        const start = performance.now();
-        const duration = 1200;
-
-        function tick(now) {
-          const progress = Math.min((now - start) / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          node.textContent = Math.round(target * eased);
-          if (progress < 1) {
-            requestAnimationFrame(tick);
-          }
-        }
-
-        requestAnimationFrame(tick);
-        counterObserver.unobserve(node);
-      });
-    },
-    { threshold: 0.5 }
-  );
-
-  document.querySelectorAll("[data-counter]").forEach((counter) => {
-    counterObserver.observe(counter);
-  });
 }
 
 function setupParallax() {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   const heroSection = document.getElementById("hero");
-  const heroContent = heroSection.querySelector(".hero__content");
+  const heroContent = heroSection?.querySelector(".hero__content");
+
+  if (!heroSection || !heroContent) return;
 
   function updateParallax() {
     const rect = heroSection.getBoundingClientRect();
-    const offset = rect.top * -0.08;
+    const offset = rect.top * -0.06;
     heroContent.style.setProperty("--hero-offset", `${offset}px`);
   }
 
