@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>About — Hakunamatata</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+.about-hero {
+  position: relative;
+  padding: 180px var(--gutter) 100px;
+  overflow: hidden;
+}
+.about-hero .bg-grass { top: -200px; right: -200px; opacity: 0.5; }
+.about-hero .bg-sky   { bottom: -300px; left: -200px; opacity: 0.5; }
+.about-eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 24px;
+}
+.about-title {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(48px, 9vw, 140px);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+  max-width: 1100px;
+}
+.about-title em { font-style: italic; color: var(--accent); }
+
+.manifesto {
+  padding: clamp(80px, 10vw, 140px) 0;
+  border-top: 1px solid var(--ink-line);
+}
+.manifesto-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: clamp(40px, 6vw, 96px);
+}
+@media (max-width: 880px) { .manifesto-grid { grid-template-columns: 1fr; } }
+.manifesto-h {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  position: sticky;
+  top: 100px;
+  align-self: start;
+}
+.manifesto-body p {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(22px, 2.4vw, 32px);
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  margin-bottom: 1em;
+  text-wrap: pretty;
+}
+.manifesto-body p em { font-style: italic; color: var(--accent); }
+.manifesto-body p:last-child { margin-bottom: 0; }
+
+.principles {
+  padding: clamp(80px, 10vw, 140px) 0;
+  background: var(--bg-2);
+  border-top: 1px solid var(--ink-line);
+  border-bottom: 1px solid var(--ink-line);
+}
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--ink-line);
+  margin-top: 48px;
+}
+@media (max-width: 880px) { .principles-grid { grid-template-columns: 1fr; } }
+.principle {
+  background: var(--bg-2);
+  padding: clamp(28px, 3.5vw, 48px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.principle-num {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+}
+.principle h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+.principle p {
+  color: var(--ink-soft);
+  font-size: 15.5px;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.team {
+  padding: clamp(80px, 10vw, 140px) 0;
+}
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 3vw, 40px);
+  margin-top: 48px;
+}
+@media (max-width: 880px) { .team-grid { grid-template-columns: 1fr; } }
+.member {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.member-photo {
+  aspect-ratio: 4 / 5;
+  background: repeating-linear-gradient(45deg, var(--bg-2), var(--bg-2) 8px, var(--ink-line) 8px, var(--ink-line) 9px);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.member-name {
+  font-family: var(--display);
+  font-size: clamp(22px, 2.4vw, 28px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+.member-role {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.member-bio {
+  font-size: 14.5px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+</style>
+</head>
+<body data-theme="meadow" data-density="regular">
+<div class="grain" aria-hidden></div>
+<div id="root"></div>
+
+<script type="text/babel" src="app-shell.jsx"></script>
+
+<script type="text/babel" data-presets="react">
+function AboutPage() {
+  return (
+    <>
+      <MagneticCursor />
+      <GlobalReveal />
+      <Nav active="about" />
+      <main>
+        <section className="about-hero">
+          <div className="bg-grass" />
+          <div className="bg-sky" />
+          <div className="container">
+            <div className="about-eyebrow reveal in">About — Posture & Origin</div>
+            <h1 className="about-title reveal in">
+              We hold the <em>idea</em> in the part of its life when it
+              still benefits from being held.
+            </h1>
+          </div>
+        </section>
+
+        <section className="manifesto">
+          <div className="container">
+            <div className="manifesto-grid">
+              <div className="manifesto-h reveal">Manifesto, abridged</div>
+              <div className="manifesto-body reveal">
+                <p>
+                  Hakunamatata was started, if "started" is the right verb,
+                  during a long lunch in early 2025. The lunch is still
+                  technically going.
+                </p>
+                <p>
+                  We came to the same observation independently and at the
+                  same time, which is the kind of detail that <em>matters
+                  later.</em> Specifically: most companies become legible
+                  too quickly. They harden into product before the idea
+                  has finished breathing.
+                </p>
+                <p>
+                  The thesis is small. There exists a window — measured in
+                  months, possibly years — where a company is most
+                  valuable when it remains unresolved. Premature
+                  specificity drains the conviction out of capital.
+                </p>
+                <p>
+                  Our discipline is to <em>not finish forming</em> for as
+                  long as that's the more interesting answer.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="principles">
+          <div className="container">
+            <span className="eyebrow">Operating Principles</span>
+            <h2 className="section-title" style={{ marginTop: 16, maxWidth: 900 }}>
+              Six commitments. <em>None of them load-bearing.</em>
+            </h2>
+            <div className="principles-grid reveal-stagger">
+              {[
+                { n: '01', t: 'Tone over throughput', d: "We optimize for the kind of email we're proud to send, even if it takes nineteen days." },
+                { n: '02', t: 'Restraint as a feature', d: "Every section that doesn't exist yet is a section we haven't compromised." },
+                { n: '03', t: 'Calm capital', d: "Money should arrive at the speed of considered thought, never the speed of FOMO." },
+                { n: '04', t: 'Premium ambiguity', d: "If it must be one thing, it should at least photograph well as several." },
+                { n: '05', t: 'Selective specificity', d: "We become specific only when the room asks for it correctly." },
+                { n: '06', t: 'Founder retention', d: "The founders are kept rested, fed, and away from the operational mood." },
+              ].map((p) => (
+                <article key={p.n} className="principle">
+                  <span className="principle-num">{p.n}</span>
+                  <h3>{p.t}</h3>
+                  <p>{p.d}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="team">
+          <div className="container">
+            <span className="eyebrow">Composition</span>
+            <h2 className="section-title" style={{ marginTop: 16, maxWidth: 900 }}>
+              A small group of people, <em>tastefully unaccountable.</em>
+            </h2>
+            <div className="team-grid reveal-stagger">
+              {[
+                { n: 'Co-founder', r: 'Atmosphere & Intent', b: 'Was an early investor in their own ideas. Currently responsible for tone, light, and what gets left out.' },
+                { n: 'Co-founder', r: 'Continuity & Retention', b: 'Holds the long memory of the company, including conversations that have not yet happened.' },
+                { n: 'Advisor (silent)', r: 'Selective Disclosure', b: 'Has been advising for some time. Has not been seen in some time. The two facts are unrelated.' },
+              ].map((m, i) => (
+                <article key={i} className="member">
+                  <div className="member-photo">portrait, eventually</div>
+                  <div className="member-role">{m.r}</div>
+                  <div className="member-name">{m.n}</div>
+                  <p className="member-bio">{m.b}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <FinalCTA />
+      </main>
+      <Footer />
+    </>
+  );
+}
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<AboutPage />);
+</script>
+<script type="text/babel" src="tail.jsx"></script>
+</body>
+</html>
