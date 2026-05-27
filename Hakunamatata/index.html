@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hakunamatata — Private Narrative Infrastructure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body data-theme="meadow" data-density="regular">
+<div class="grain" aria-hidden></div>
+<div id="root"></div>
+
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="app-shell.jsx"></script>
+<script type="text/babel" src="hero.jsx"></script>
+<script type="text/babel" src="sections.jsx"></script>
+<script type="text/babel" src="tail.jsx"></script>
+
+<script type="text/babel" data-presets="react">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "theme": "meadow",
+  "density": "regular",
+  "displayFont": "Fraunces",
+  "heroVariant": "kinetic",
+  "accentHue": 144
+}/*EDITMODE-END*/;
+
+const FONT_STACKS = {
+  Fraunces: "'Fraunces', 'Times New Roman', serif",
+  Tiempos: "'Fraunces', Georgia, serif",
+  Grotesk: "'Inter Tight', 'Helvetica Neue', sans-serif",
+  Mono:    "'JetBrains Mono', ui-monospace, monospace",
+};
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+
+  React.useEffect(() => {
+    document.body.dataset.theme = t.theme;
+    document.body.dataset.density = t.density;
+    const r = document.documentElement.style;
+    r.setProperty('--display', FONT_STACKS[t.displayFont] || FONT_STACKS.Fraunces);
+    // accent hue override (kept reasonable saturation/lightness)
+    if (t.theme === 'meadow') {
+      r.setProperty('--accent', `oklch(0.58 0.15 ${t.accentHue})`);
+    } else {
+      r.removeProperty('--accent');
+    }
+  }, [t]);
+
+  return (
+    <>
+      <MagneticCursor />
+      <GlobalReveal />
+      <Nav active="home" />
+      <main>
+        <KineticHero variant={t.heroVariant} />
+        <VCStrip />
+        <HowItWorks />
+        <WhyUs />
+        <Stats />
+        <Conversations />
+        <Roadmap />
+        <FAQ />
+        <FinalCTA />
+      </main>
+      <Footer />
+
+      <TweaksPanel title="Tweaks">
+        <TweakSection label="Theme" />
+        <TweakSelect label="Palette" value={t.theme}
+          options={[
+            { value: 'meadow', label: 'Meadow (default)' },
+            { value: 'sky',    label: 'Sky' },
+            { value: 'sunset', label: 'Sunset' },
+            { value: 'dusk',   label: 'Dusk' },
+          ]}
+          onChange={(v) => setTweak('theme', v)} />
+        {t.theme === 'meadow' && (
+          <TweakSlider label="Accent hue" value={t.accentHue} min={0} max={360} step={1}
+            onChange={(v) => setTweak('accentHue', v)} />
+        )}
+
+        <TweakSection label="Layout" />
+        <TweakRadio label="Density" value={t.density}
+          options={['tight', 'regular', 'spacious']}
+          onChange={(v) => setTweak('density', v)} />
+
+        <TweakSection label="Type" />
+        <TweakSelect label="Display font" value={t.displayFont}
+          options={[
+            { value: 'Fraunces', label: 'Fraunces (serif)' },
+            { value: 'Grotesk',  label: 'Inter Tight (grotesk)' },
+            { value: 'Mono',     label: 'JetBrains Mono' },
+          ]}
+          onChange={(v) => setTweak('displayFont', v)} />
+
+        <TweakSection label="Hero" />
+        <TweakRadio label="Variant" value={t.heroVariant}
+          options={[
+            { value: 'kinetic', label: 'Kinetic' },
+            { value: 'gradient', label: 'Gradient' },
+            { value: 'static', label: 'Static' },
+          ]}
+          onChange={(v) => setTweak('heroVariant', v)} />
+      </TweaksPanel>
+    </>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+</script>
+</body>
+</html>

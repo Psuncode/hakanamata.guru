@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pricing — Hakunamatata</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+.pricing-hero {
+  position: relative;
+  padding: 180px var(--gutter) 80px;
+  overflow: hidden;
+  text-align: center;
+}
+.pricing-hero .bg-sun { top: -100px; left: 50%; transform: translateX(-50%); opacity: 0.6; }
+.pricing-eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 20px;
+}
+.pricing-title {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(48px, 8vw, 120px);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-wrap: balance;
+}
+.pricing-title em { font-style: italic; color: var(--accent); }
+.pricing-sub {
+  margin: 24px auto 0;
+  font-size: clamp(17px, 1.5vw, 21px);
+  color: var(--ink-soft);
+  max-width: 640px;
+  text-wrap: pretty;
+}
+
+.tiers {
+  padding: clamp(60px, 8vw, 120px) 0;
+}
+.tiers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 2.5vw, 32px);
+  align-items: stretch;
+}
+@media (max-width: 880px) { .tiers-grid { grid-template-columns: 1fr; } }
+.tier {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(28px, 3.5vw, 44px);
+  border-radius: 24px;
+  background: var(--bg-2);
+  border: 1px solid var(--ink-line);
+  transition: transform .4s, box-shadow .4s;
+  position: relative;
+  overflow: hidden;
+}
+.tier:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 30px 60px -30px color-mix(in oklab, var(--ink) 30%, transparent);
+}
+.tier-featured {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+.tier-featured .eyebrow,
+.tier-featured .tier-name,
+.tier-featured .tier-price-num,
+.tier-featured .tier-price-unit,
+.tier-featured .tier-desc,
+.tier-featured ul li { color: var(--bg); }
+.tier-featured ul li { border-color: color-mix(in oklab, var(--bg) 15%, transparent); }
+.tier-featured ul li::before { color: var(--accent-3, #f3c34a); }
+.tier-featured .btn-primary {
+  background: var(--bg);
+  color: var(--ink);
+}
+.tier-badge {
+  position: absolute;
+  top: 20px; right: 20px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: var(--accent);
+  color: var(--bg);
+}
+.tier-name {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(28px, 3vw, 38px);
+  letter-spacing: -0.02em;
+  margin: 14px 0 6px;
+}
+.tier-desc {
+  color: var(--ink-soft);
+  font-size: 15px;
+  margin-bottom: 28px;
+  text-wrap: pretty;
+}
+.tier-price {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 28px;
+  font-family: var(--display);
+  font-weight: 300;
+}
+.tier-price-num {
+  font-size: clamp(48px, 5vw, 64px);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.tier-price-unit {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink-soft);
+  letter-spacing: 0.06em;
+}
+.tier ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 28px;
+  flex: 1;
+}
+.tier ul li {
+  position: relative;
+  padding: 14px 0 14px 28px;
+  font-size: 15px;
+  color: var(--ink);
+  border-top: 1px solid var(--ink-line);
+}
+.tier ul li:last-child { border-bottom: 1px solid var(--ink-line); }
+.tier ul li::before {
+  content: "✓";
+  position: absolute;
+  left: 0; top: 14px;
+  color: var(--accent);
+  font-weight: 600;
+}
+.tier .btn { justify-content: center; width: 100%; }
+
+.note {
+  padding: clamp(60px, 8vw, 100px) 0;
+  background: var(--bg-2);
+  border-top: 1px solid var(--ink-line);
+  border-bottom: 1px solid var(--ink-line);
+  text-align: center;
+}
+.note-title {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  max-width: 800px;
+  margin: 0 auto;
+  text-wrap: balance;
+}
+.note-title em { font-style: italic; color: var(--accent); }
+.compare {
+  padding: clamp(80px, 10vw, 140px) 0;
+}
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 48px;
+  font-size: 15px;
+}
+.compare-table th, .compare-table td {
+  padding: 18px 20px;
+  text-align: left;
+  border-bottom: 1px solid var(--ink-line);
+}
+.compare-table thead th {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 500;
+  border-bottom: 2px solid var(--ink);
+}
+.compare-table tbody th {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+}
+.compare-table .check { color: var(--accent); font-weight: 600; }
+.compare-table .x { color: var(--ink-faint); }
+</style>
+</head>
+<body data-theme="meadow" data-density="regular">
+<div class="grain" aria-hidden></div>
+<div id="root"></div>
+
+<script type="text/babel" src="app-shell.jsx"></script>
+
+<script type="text/babel" data-presets="react">
+function PricingPage() {
+  return (
+    <>
+      <MagneticCursor />
+      <GlobalReveal />
+      <Nav active="pricing" />
+      <main>
+        <section className="pricing-hero">
+          <div className="bg-sun" />
+          <div className="container">
+            <div className="pricing-eyebrow reveal in">Pricing — Calmly</div>
+            <h1 className="pricing-title reveal in">
+              Three ways to <em>not be in a hurry</em> together.
+            </h1>
+            <p className="pricing-sub reveal in">
+              All plans include selective disclosure, low cortisol levels,
+              and an unspecified amount of taste. None include urgency.
+            </p>
+          </div>
+        </section>
+
+        <section className="tiers">
+          <div className="container">
+            <div className="tiers-grid reveal-stagger">
+              <article className="tier">
+                <span className="eyebrow">Ambient</span>
+                <h3 className="tier-name">Drift</h3>
+                <p className="tier-desc">For founders who would like to remain in the productive state between idea and obligation.</p>
+                <div className="tier-price">
+                  <span className="tier-price-num">$0</span>
+                  <span className="tier-price-unit">/ politely indefinite</span>
+                </div>
+                <ul>
+                  <li>Quarterly ambient correspondence</li>
+                  <li>One unread newsletter, considered</li>
+                  <li>Inclusion in the long-form list</li>
+                  <li>No deliverables, by design</li>
+                </ul>
+                <a href="index.html#closing" className="btn btn-ghost magnetic">Stay close →</a>
+              </article>
+
+              <article className="tier tier-featured">
+                <span className="tier-badge">Most polished</span>
+                <span className="eyebrow">Considered</span>
+                <h3 className="tier-name">Speak</h3>
+                <p className="tier-desc">For capital and founders who want the thesis carried, packaged, and selectively shown.</p>
+                <div className="tier-price">
+                  <span className="tier-price-num">$24k</span>
+                  <span className="tier-price-unit">/ quarter, prepaid</span>
+                </div>
+                <ul>
+                  <li>Bespoke phrasing per room</li>
+                  <li>Curated reading list, monthly</li>
+                  <li>Two off-record dinners, annually</li>
+                  <li>Continuity of tone across investors</li>
+                  <li>Selective access to the long memory</li>
+                </ul>
+                <a href="index.html#closing" className="btn btn-primary magnetic">Begin the conversation →</a>
+              </article>
+
+              <article className="tier">
+                <span className="eyebrow">Allocative</span>
+                <h3 className="tier-name">Allocate</h3>
+                <p className="tier-desc">For institutions who would like the thesis preserved at altitude across multiple cycles.</p>
+                <div className="tier-price">
+                  <span className="tier-price-num">$—</span>
+                  <span className="tier-price-unit">/ on request, slowly</span>
+                </div>
+                <ul>
+                  <li>Everything in Speak</li>
+                  <li>Annual mood retainer</li>
+                  <li>One curated room per quarter</li>
+                  <li>Custom narrative shell</li>
+                  <li>Permission to imply alignment</li>
+                </ul>
+                <a href="index.html#closing" className="btn btn-ghost magnetic">Inquire, eventually →</a>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section className="compare">
+          <div className="container">
+            <div className="section-head reveal">
+              <span className="eyebrow">Comparison</span>
+              <h2 className="section-title">
+                What is, and isn't, <em>included.</em>
+              </h2>
+            </div>
+            <table className="compare-table reveal">
+              <thead>
+                <tr>
+                  <th>Capability</th>
+                  <th>Drift</th>
+                  <th>Speak</th>
+                  <th>Allocate</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ['Ambient correspondence', 1, 1, 1],
+                  ['Bespoke phrasing per room', 0, 1, 1],
+                  ['Off-record dinners', 0, 1, 1],
+                  ['Continuity of tone', 0, 1, 1],
+                  ['Custom narrative shell', 0, 0, 1],
+                  ['Permission to imply alignment', 0, 0, 1],
+                  ['Operational deliverables', 0, 0, 0],
+                  ['Urgency', 0, 0, 0],
+                ].map(([cap, a, b, c], i) => (
+                  <tr key={i}>
+                    <th>{cap}</th>
+                    <td className={a ? 'check' : 'x'}>{a ? '✓' : '—'}</td>
+                    <td className={b ? 'check' : 'x'}>{b ? '✓' : '—'}</td>
+                    <td className={c ? 'check' : 'x'}>{c ? '✓' : '—'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section className="note">
+          <div className="container">
+            <h2 className="note-title reveal">
+              Pricing is <em>indicative.</em> Final terms emerge from the
+              shape of the conversation.
+            </h2>
+          </div>
+        </section>
+
+        <FAQ />
+        <FinalCTA />
+      </main>
+      <Footer />
+    </>
+  );
+}
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<PricingPage />);
+</script>
+<script type="text/babel" src="tail.jsx"></script>
+</body>
+</html>
